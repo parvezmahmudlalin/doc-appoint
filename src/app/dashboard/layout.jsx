@@ -1,11 +1,25 @@
-import React from 'react';
+import Sidebar from "@/components/dashboard/Sidebar";
 
-const DashboardLayout = () => {
-    return (
-        <div>
-            Thsi is Dashboard Layout
-        </div>
-    );
+
+
+export const metadata = {
+  title: "Dashboard - DocAppoint",
+  description: "Manage your appointments easily",
 };
 
-export default DashboardLayout;
+
+
+const layout = ({children}) => {
+  return (
+  
+    <div className="min-h-screen flex bg-gray-50">
+      <Sidebar></Sidebar>
+      <main className="flex-1">
+        {children}
+      </main>
+    </div>
+  
+  );
+};
+
+export default layout;

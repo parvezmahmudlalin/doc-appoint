@@ -1,12 +1,11 @@
 import React from 'react';
 
 const Sidebar = () => {
-    return (
-        <div>
-            This is Dashboard Side bar
-            
-        </div>
-    );
+  return (
+    <div>
+      
+    </div>
+  );
 };
 
 export default Sidebar;
