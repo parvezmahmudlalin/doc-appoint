@@ -9,46 +9,106 @@ import {
   Stethoscope,
 } from "lucide-react";
 
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaGithub,
+  FaXTwitter,
+} from "react-icons/fa6";
+
 export default function Footer() {
   return (
     <footer className="bg-[#BFDDE0] mt-20">
-
       <div className="max-w-7xl mx-auto px-8 py-14">
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-
           {/* LOGO */}
           <div>
             <div className="flex items-center gap-4 mb-5">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center">
-               <div className="w-[50px] h-[50px] bg-sky-600 rounded-[10px] flex items-center justify-center shadow-sm">
-              <Stethoscope size={20} className="text-white" />
-            </div>
+              <div className="w-[50px] h-[50px] bg-sky-600 rounded-[10px] flex items-center justify-center shadow-sm">
+                <Stethoscope size={20} className="text-white" />
               </div>
 
-              <h2 className="text-3xl font-bold text-slate-900 ">
+              <h2 className="text-3xl font-bold text-slate-900">
                 DocAppoint
               </h2>
             </div>
 
-            <p className="text-slate-700 leading-relaxed">
-              Book appointments with trusted doctors anytime,
-              anywhere. Fast, secure and convenient healthcare.
+            <p className="text-slate-700 leading-relaxed mb-6">
+              Book appointments with trusted doctors anytime, anywhere.
+              Fast, secure and convenient healthcare.
             </p>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
+              <Link
+                href="https://facebook.com"
+                target="_blank"
+                className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow hover:bg-sky-600 hover:text-white duration-300"
+              >
+                <FaFacebookF />
+              </Link>
+
+              <Link
+                href="https://instagram.com"
+                target="_blank"
+                className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow hover:bg-pink-500 hover:text-white duration-300"
+              >
+                <FaInstagram />
+              </Link>
+
+              <Link
+                href="https://x.com"
+                target="_blank"
+                className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow hover:bg-black hover:text-white duration-300"
+              >
+                <FaXTwitter />
+              </Link>
+
+              <Link
+                href="https://linkedin.com"
+                target="_blank"
+                className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow hover:bg-blue-700 hover:text-white duration-300"
+              >
+                <FaLinkedinIn />
+              </Link>
+
+              <Link
+                href="https://github.com"
+                target="_blank"
+                className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow hover:bg-slate-800 hover:text-white duration-300"
+              >
+                <FaGithub />
+              </Link>
+            </div>
           </div>
 
           {/* QUICK LINKS */}
-          <div className=" md:ml-11">
+          <div className="md:ml-11">
             <h3 className="text-xl font-semibold text-slate-900 mb-5">
               Quick Links
             </h3>
 
             <ul className="space-y-3 text-slate-700">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/find-doctors">Find Doctors</Link></li>
-              <li><Link href="/appointments">Appointments</Link></li>
-              <li><Link href="/departments">Departments</Link></li>
-              <li><Link href="/about">About Us</Link></li>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+
+              <li>
+                <Link href="/appointments">Appointments</Link>
+              </li>
+
+              <li>
+                <Link href="/dashboard">Dashboard</Link>
+              </li>
+
+              <li>
+                <Link href="/about">About Us</Link>
+              </li>
+
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
             </ul>
           </div>
 
@@ -74,7 +134,6 @@ export default function Footer() {
             </h3>
 
             <div className="space-y-4 text-slate-700">
-
               <div className="flex gap-3">
                 <MapPin size={18} />
                 <span>Mymensingh, Bangladesh</span>
@@ -87,7 +146,7 @@ export default function Footer() {
 
               <div className="flex gap-3">
                 <Mail size={18} />
-                <span>support@docappointment.com</span>
+                <span>support@docappoint.com</span>
               </div>
             </div>
           </div>
@@ -95,11 +154,9 @@ export default function Footer() {
 
         {/* Divider */}
         <div className="border-t border-slate-500/40 mt-12 pt-6">
-
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-
-            <p className="text-slate-700">
-              © 2026 DocAppointment. All Rights Reserved.
+            <p className="text-slate-700 text-center">
+              © 2026 DocAppoint. All Rights Reserved.
             </p>
 
             <div className="flex gap-6 text-slate-700">
@@ -119,7 +176,6 @@ export default function Footer() {
               Back to top
               <ArrowUpRight size={18} />
             </button>
-
           </div>
         </div>
       </div>

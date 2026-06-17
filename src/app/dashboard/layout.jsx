@@ -14,7 +14,7 @@ const layout = ({children}) => {
   
     <div className="min-h-screen flex bg-gray-50">
       <Sidebar></Sidebar>
-      <main className="flex-1">
+      <main className="flex-1 max-w-7xl w-auto">
         {children}
       </main>
     </div>
