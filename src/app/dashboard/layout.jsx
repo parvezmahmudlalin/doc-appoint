@@ -1,3 +1,4 @@
+import MobileNav from "@/components/dashboard/MobileNav";
 import Sidebar from "@/components/dashboard/Sidebar";
 
 
@@ -14,9 +15,10 @@ const layout = ({children}) => {
   
     <div className="min-h-screen flex bg-gray-50">
       <Sidebar></Sidebar>
-      <main className="flex-1 max-w-7xl w-auto">
+      <main className="flex-1 ">
         {children}
       </main>
+      <MobileNav/>
     </div>
   
   );
