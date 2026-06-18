@@ -3,7 +3,7 @@ import DoctorCard from "../doctors/DoctorCard";
 import Link from "next/link";
 
 const TopDoctors = async () => {
-  const res = await fetch("http://localhost:5000/doctors", {
+  const res = await fetch("http://localhost:5000/appointments", {
     cache: "no-store",
   });
 
