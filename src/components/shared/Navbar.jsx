@@ -15,7 +15,7 @@ import {
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/appointments", label: "Appointments", icon: Calendar },
+  { href: "/appointments", label: "All Appointments", icon: Calendar },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
 ];
 

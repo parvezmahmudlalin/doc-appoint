@@ -95,8 +95,8 @@ const DoctorDetailsPage = async ({ params }) => {
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4 mt-auto">
                 <Link
-                  href={`/appointments/book/${doctor.id}`}
-                  className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-2xl flex items-center justify-center gap-3 transition-all active:scale-[0.97] shadow-lg shadow-emerald-500/30"
+                  href={`/appointments/book/${doctor._id}`}
+                  className="flex-1 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-2xl flex items-center justify-center gap-3 transition-all active:scale-[0.97] shadow-lg shadow-emerald-500/30"
                 >
                   <FaCalendarCheck />
                   Book Appointment

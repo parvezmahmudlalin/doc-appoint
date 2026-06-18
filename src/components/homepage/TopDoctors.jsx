@@ -45,7 +45,7 @@ const TopDoctors = async () => {
       {/* Bottom CTA */}
       <div className="flex justify-center mt-12">
         <Link
-          href="/doctors"
+          href="/appointments"
           className="btn btn-primary btn-wide"
         >
           View All Doctors

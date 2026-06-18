@@ -110,7 +110,7 @@ const DoctorCard = ({ doctor }) => {
             href={`/appointments/${doctorId}`}
             className="group/btn inline-flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-sky-600 text-white text-sm font-semibold px-5 py-3 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-lg active:scale-[0.97] whitespace-nowrap"
           >
-            View Profile
+            View Details 
             <ArrowUpRight size={16} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
           </Link>
         </div>
