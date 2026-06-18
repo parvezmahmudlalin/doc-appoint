@@ -107,7 +107,7 @@ const DoctorCard = ({ doctor }) => {
           ) : <div />}
 
           <Link
-            href={`/doctor/${doctorId}`}
+            href={`/appointments/${doctorId}`}
             className="group/btn inline-flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-sky-600 text-white text-sm font-semibold px-5 py-3 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-lg active:scale-[0.97] whitespace-nowrap"
           >
             View Profile
