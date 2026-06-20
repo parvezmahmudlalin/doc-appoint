@@ -135,13 +135,15 @@ console.log(data,error )
         </Form>
 
         {/* Divider */}
-        <div className="flex items-center gap-4 my-8">
-          <Separator className="bg-gray-200" />
-          <span className="text-xs text-gray-400 tracking-widest">
-            OR
-          </span>
-          <Separator className="bg-gray-200" />
-        </div>
+        <div className="flex items-center gap-3 my-8">
+  <div className="h-px flex-1 bg-gray-200" />
+  
+  <span className="text-[11px] font-medium text-gray-400 tracking-[0.2em] uppercase">
+    OR
+  </span>
+
+  <div className="h-px flex-1 bg-gray-200" />
+</div>
 
         {/* Google Login */}
         <Button
