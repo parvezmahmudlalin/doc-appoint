@@ -46,21 +46,21 @@ const SignUpPage = () => {
         }
     }
 
-
-    // const handleGoogleSignin = async() => {
-    // await authClient.signIn.social({
-    //     provider: "google"
-    // })
-
+const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+ 
   
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-2xl mx-auto">
       <div className="text-center my-3">
         <h1 className="text-2xl font-bold">Create Account</h1>
         <p>Sign up to connect with trusted healthcare professionals</p>
       </div>
       <Card className="border rounded-none">
-        <Form onSubmit={onSubmit}  className="flex w-96 flex-col gap-4 mx-auto">
+        <Form onSubmit={onSubmit}  className="flex  flex-col gap-4 mx-auto">
           <TextField isRequired name="name" type="text">
             <Label>Name</Label>
             <Input placeholder="Enter your name" />
@@ -118,19 +118,23 @@ const SignUpPage = () => {
               Create Account
             </Button>
           </div>
-        </Form>
-        <div className="flex justify-center items-center gap-3">
-            <Separator/>
-           <div className="whitespace-nowrap"> Or sign up with </div>
-              <Separator/>
-            </div>
+       
+       <div className="flex items-center gap-3 w-full">
+  <Separator className="flex-1" />
+  <div className="whitespace-nowrap text-sm text-gray-500">
+    Or sign up with
+  </div>
+  <Separator className="flex-1" />
+</div>
         <div>
-            <Button variant="outline"  className={'w-full rounded-none'}><FcGoogle /> Sign in with Google</Button>
+            <Button variant="outline" onClick={handleGoogleSignin}  className={'w-full rounded-none'}><FcGoogle /> Sign in with Google</Button>
         </div>
+         </Form>
       </Card>
     </div>
     );
-}
+};
+
 
 
 export default SignUpPage;

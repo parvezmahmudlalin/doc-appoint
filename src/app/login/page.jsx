@@ -39,11 +39,11 @@ console.log(data,error )
   };
 
 
-  // const handleGoogleSignin = async () => {
-  //   await authClient.signIn.social({
-  //     provider: "google",
-  //   });
-  // };
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-50 via-cyan-50 to-slate-100 px-4">
@@ -135,20 +135,18 @@ console.log(data,error )
         </Form>
 
         {/* Divider */}
-        <div className="flex items-center gap-3 my-8">
-  <div className="h-px flex-1 bg-gray-200" />
-  
-  <span className="text-[11px] font-medium text-gray-400 tracking-[0.2em] uppercase">
-    OR
-  </span>
-
-  <div className="h-px flex-1 bg-gray-200" />
+      <div className="flex items-center gap-3 w-full">
+  <Separator className="flex-1" />
+  <div className="whitespace-nowrap text-sm text-gray-500">
+    Or sign up with
+  </div>
+  <Separator className="flex-1" />
 </div>
 
         {/* Google Login */}
         <Button
           
-          variant="bordered"
+          variant="bordered" onClick={handleGoogleSignin}
           className="h-11 w-full rounded-xl border-gray-200 hover:bg-gray-50 flex items-center justify-center gap-2"
         >
           <FcGoogle size={20} />

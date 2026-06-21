@@ -12,6 +12,8 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { useSession } from "@/lib/auth-client";
+
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
@@ -25,6 +27,18 @@ const Navbar = () => {
 
   const handleClose = () => setOpen(false);
 
+  const {data: session ,isPending} = useSession();
+
+  if(isPending) {
+    return <div>Loading....</div>
+  }
+  const user = session?.user;
+  console.log(user)
+
+
+  const handleSignOut = async() => {
+      await authClient.signOut();
+    }
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6">
