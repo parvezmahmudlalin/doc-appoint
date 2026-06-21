@@ -145,6 +145,8 @@
 
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+import { Button } from "@heroui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiGrid, FiCalendar, FiUser, FiLogOut } from "react-icons/fi";
@@ -158,18 +160,15 @@ const links = [
 export default function Sidebar() {
   const pathname = usePathname();
 
+ const userData = authClient.useSession();
+  const user = userData.data?.user;
+  const handleSignOut = async () => {
+      await authClient.signOut();
+     
+    };
+
   return (
     <aside className="hidden lg:flex w-72 h-screen bg-white border-r flex-col">
-
-      {/* Logo */}
-      <div className="p-6 border-b">
-        <h1 className="text-2xl font-bold text-sky-600">
-          DocAppoint
-        </h1>
-        <p className="text-xs text-gray-500">
-          Patient Dashboard
-        </p>
-      </div>
 
       {/* Links */}
       <nav className="flex-1 p-4 space-y-2">
@@ -197,10 +196,12 @@ export default function Sidebar() {
 
       {/* Logout */}
       <div className="p-4 border-t">
-        <button className="flex items-center gap-2 text-red-500">
+       {
+        user &&  <Button variant="ghost" className="flex items-center gap-2 text-red-500" onClick={handleSignOut}>
           <FiLogOut />
           Logout
-        </button>
+        </Button>
+       }
       </div>
 
     </aside>
