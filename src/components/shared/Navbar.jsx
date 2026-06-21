@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Avatar, Button } from "@heroui/react";
 import {
   Stethoscope,
   Home,
   Calendar,
   LayoutDashboard,
+  LogIn,
   UserPlus,
+  LogOut,
   Menu,
   X,
 } from "lucide-react";
-import { useSession } from "@/lib/auth-client";
-
+import { authClient } from "@/lib/auth-client";
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
@@ -25,20 +27,16 @@ const Navbar = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const userData = authClient.useSession();
+  const user = userData.data?.user;
+
   const handleClose = () => setOpen(false);
 
-  const {data: session ,isPending} = useSession();
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    handleClose();
+  };
 
-  if(isPending) {
-    return <div>Loading....</div>
-  }
-  const user = session?.user;
-  console.log(user)
-
-
-  const handleSignOut = async() => {
-      await authClient.signOut();
-    }
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6">
@@ -89,22 +87,63 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center gap-2.5 shrink-0">
-            <Link
-              href="/login"
-              className="px-4 py-[7px] text-[13.5px] border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition"
-            >
-              Log in
-            </Link>
+          {/* Desktop Auth Section */}
+          <div className="hidden md:flex items-center gap-3 shrink-0">
+            {!user ? (
+              <>
+                <Link href="/login">
+                  <Button
+                    startContent={<LogIn size={15} />}
+                    variant="bordered"
+                    size="sm"
+                    className="px-4 border-sky-200 text-sky-600 font-medium rounded-lg hover:bg-sky-50 transition"
+                  >
+                    Log in
+                  </Button>
+                </Link>
 
-            <Link
-              href="/register"
-              className="flex items-center gap-1.5 px-4 py-[7px] text-[13.5px] bg-sky-600 text-white font-medium rounded-lg hover:bg-sky-700 transition"
-            >
-              <UserPlus size={14} />
-              Register
-            </Link>
+                <Link href="/register">
+                  <Button
+                    startContent={<UserPlus size={15} />}
+                    size="sm"
+                    className="px-4 bg-sky-600 text-white font-medium rounded-lg hover:bg-sky-700 transition"
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <Link href={"/dashboard/my-profile"}>
+              <div className="flex items-center gap-3">
+                <Avatar size="sm">
+                  <Avatar.Image
+                    alt={user?.name}
+                    src={user?.image}
+                    referrerPolicy="no-referrer"
+                  />
+                  <Avatar.Fallback>
+                    {user?.name?.charAt(0)?.toUpperCase()}
+                  </Avatar.Fallback>
+                </Avatar>
+
+                <span className="text-[13.5px] font-medium text-gray-700 max-w-[120px] truncate">
+                  {user?.name}
+                </span>
+
+              <Button
+  onClick={handleSignOut}
+  startContent={<LogOut size={14} />}
+  size="sm"
+  className="text-white font-medium rounded-lg
+             bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700
+             shadow-md hover:shadow-lg
+             hover:scale-[1.02] active:scale-[0.98]
+             transition-all duration-200 border-0"
+>
+  Logout
+</Button>
+              </div></Link>
+            )}
           </div>
 
           {/* Mobile Button */}
@@ -119,7 +158,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
-            open ? "max-h-[400px] pb-4" : "max-h-0"
+            open ? "max-h-[480px] pb-4" : "max-h-0"
           }`}
         >
           <div className="border-t border-gray-100 pt-3 mt-2">
@@ -148,26 +187,60 @@ const Navbar = () => {
               })}
             </ul>
 
-            {/* Buttons */}
+            {/* Mobile Auth Section */}
             <div className="flex flex-col gap-2 mt-4">
-              <Link
-                href="/login"
-                onClick={handleClose}
-                className="w-full text-center px-4 py-2 border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50"
-              >
-                Log in
-              </Link>
+              {!user ? (
+                <>
+                  <Link href="/login" onClick={handleClose}>
+                    <Button
+                      startContent={<LogIn size={15} />}
+                      variant="bordered"
+                      className="w-full border-sky-200 text-sky-600 font-medium rounded-lg"
+                    >
+                      Log in
+                    </Button>
+                  </Link>
 
-              <Link
-                href="/register"
-                onClick={handleClose}
-                className="w-full text-center px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700"
-              >
-                <span className="flex items-center justify-center gap-1.5">
-                  <UserPlus size={14} />
-                  Register
-                </span>
-              </Link>
+                  <Link href="/register" onClick={handleClose}>
+                    <Button
+                      startContent={<UserPlus size={15} />}
+                      className="w-full bg-sky-600 text-white font-medium rounded-lg"
+                    >
+                      Register
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                 <Link href={"/dashboard/my-profile"}>
+                  <div className="flex items-center gap-2 px-3 py-2">
+                    <Avatar size="sm">
+                      <Avatar.Image
+                        alt={user?.name}
+                        src={user?.image}
+                        referrerPolicy="no-referrer"
+                      />
+                      <Avatar.Fallback>
+                        {user?.name?.charAt(0)?.toUpperCase()}
+                      </Avatar.Fallback>
+                    </Avatar>
+                    <span className="text-sm font-medium text-gray-700 truncate">
+                      {user?.name}
+                    </span>
+                  </div>
+                 </Link>
+
+                  <Button
+                    onClick={handleSignOut}
+                    startContent={<LogOut size={14} />}
+                    color="danger"
+                    variant="bordered"
+                    className="w-full rounded-lg"
+                  >
+                    Logout
+                  </Button>
+                </>
+              )}
             </div>
 
           </div>
