@@ -5,6 +5,9 @@ import Image from "next/image";
 import { Calendar, Clock, Trash2, Stethoscope, User, AlertCircle, Edit3 } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import { Button } from "@heroui/react";
+import UpdateBookings from "@/components/dashboard/UpdateBookings";
+import DeleteBookings from "@/components/dashboard/DeleteBookings";
 
 const MyBookingPage = () => {
   const { data: session } = useSession();
@@ -35,31 +38,31 @@ const MyBookingPage = () => {
     fetchBookings();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!id) return;
+  // const handleDelete = async (id) => {
+  //   if (!id) return;
 
-    const confirmed = window.confirm("Are you sure you want to delete this appointment?");
-    if (!confirmed) return;
+  //   const confirmed = window.confirm("Are you sure you want to delete this appointment?");
+  //   if (!confirmed) return;
 
-    try {
-      const res = await fetch(`http://localhost:5000/appointments/book/${id}`, {
-        method: "DELETE",
-      });
+  //   try {
+  //     const res = await fetch(`http://localhost:5000/appointments/book/${id}`, {
+  //       method: "DELETE",
+  //     });
 
-      if (!res.ok) throw new Error("Failed to delete");
+  //     if (!res.ok) throw new Error("Failed to delete");
 
-      setBookings((prev) => prev.filter((b) => b._id !== id));
-      toast.success("Appointment deleted successfully");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to delete appointment. Please try again.");
-    }
-  };
+  //     setBookings((prev) => prev.filter((b) => b._id !== id));
+  //     toast.success("Appointment deleted successfully");
+  //   } catch (err) {
+  //     console.error(err);
+  //     toast.error("Failed to delete appointment. Please try again.");
+  //   }
+  // };
 
-  const handleUpdate = (booking) => {
-    toast.info("Update feature coming soon!");
-    // router.push(`/appointments/edit/${booking._id}`); // Uncomment when edit page is ready
-  };
+  // const handleUpdate = (booking) => {
+  //   toast.info("Update feature coming soon!");
+  //   // router.push(`/appointments/edit/${booking._id}`); // Uncomment when edit page is ready
+  // };
 
   const getDoctorImage = (booking) => {
     return booking?.imageUrl || booking?.doctorImage || "/default-doctor.jpg";
@@ -205,21 +208,24 @@ const MyBookingPage = () => {
                       </p>
 
                       <div className="flex gap-3">
-                        <button
+                        {/* <button
                           onClick={() => handleUpdate(b)}
                           className="flex items-center gap-2 px-6 py-3 text-blue-600 hover:bg-blue-50 border border-blue-200 hover:border-blue-300 rounded-2xl transition-all font-medium"
                         >
                           <Edit3 size={18} />
                           Update
-                        </button>
+                        </button> */}
 
-                        <button
+                          <Button><UpdateBookings/></Button>
+                        {/* <button
                           onClick={() => handleDelete(b._id)}
                           className="flex items-center gap-2 px-6 py-3 text-red-600 hover:bg-red-50 border border-red-200 hover:border-red-300 rounded-2xl transition-all font-medium"
                         >
                           <Trash2 size={18} />
                           Delete
-                        </button>
+                        </button> */}
+
+                        <Button><DeleteBookings></DeleteBookings></Button>
                       </div>
                     </div>
                   </div>
