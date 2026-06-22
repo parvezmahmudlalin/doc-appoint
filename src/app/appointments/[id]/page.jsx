@@ -9,7 +9,7 @@ import {
 import { MdLocationOn, MdAccessTime } from "react-icons/md";
 
 const DoctorDetailsPage = async ({ params }) => {
-  const { id } = await params;   // ← Important: await করতে হবে
+  const { id } = await params;   
 
   const res = await fetch(`http://localhost:5000/appointments/${id}`, {
     cache: "no-store",
