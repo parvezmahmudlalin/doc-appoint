@@ -3,39 +3,76 @@
 import UpdateProfile from "@/components/profile/UpdateProfile";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Card, Chip } from "@heroui/react";
-import { Mail, User, ShieldCheck, Calendar } from "lucide-react";
+import { Mail, User, ShieldCheck, Calendar, AlertCircle } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
   const { data, isPending } = authClient.useSession();
-
   const user = data?.user;
 
-  // ✅ IMPORTANT: consistent loading UI
+  const [appointmentsCount, setAppointmentsCount] = useState(0);
+  const [loadingCount, setLoadingCount] = useState(true);
+  const [countError, setCountError] = useState(false);
+
+  // Fetch dynamic appointments count
+  useEffect(() => {
+    const fetchAppointmentsCount = async () => {
+      if (!user?.email) return;
+
+      try {
+        setLoadingCount(true);
+        setCountError(false);
+
+        const res = await fetch("http://localhost:5000/appointments/book");
+
+        if (!res.ok) throw new Error("Failed to fetch");
+
+        const data = await res.json();
+        const bookings = Array.isArray(data) ? data : [];
+        
+        // Count only this user's bookings (filter by email)
+        const userBookings = bookings.filter(
+          (b) => b.userEmail === user.email || b.patientEmail === user.email
+        );
+        
+        setAppointmentsCount(userBookings.length);
+      } catch (err) {
+        console.error(err);
+        setCountError(true);
+      } finally {
+        setLoadingCount(false);
+      }
+    };
+
+    if (user?.email) {
+      fetchAppointmentsCount();
+    }
+  }, [user?.email]);
+
+  // Loading State
   if (isPending || !data) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        Loading...
+        Loading profile...
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-sky-50 to-blue-100 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-sky-50 to-blue-100 p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
 
         <Card className="overflow-hidden border-none shadow-2xl rounded-3xl bg-white/80 backdrop-blur-lg">
 
           {/* Cover */}
-          <div className="relative h-48 bg-linear-to-r from-sky-500 via-cyan-500 to-blue-600">
+          <div className="relative h-48 bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600">
             <div className="absolute inset-0 bg-black/10" />
           </div>
 
           <div className="px-6 md:px-10 pb-10">
 
-            {/* Avatar */}
+            {/* Avatar & Info */}
             <div className="flex flex-col items-center -mt-16">
-
-              {/* ✅ FIX: fallback safe rendering */}
               <Avatar className="h-32 w-32 border-[6px] border-white shadow-xl">
                 {user?.image ? (
                   <Avatar.Image
@@ -61,18 +98,18 @@ const ProfilePage = () => {
               <Chip color="primary" variant="flat" className="mt-4 px-3">
                 DocAppoint Member
               </Chip>
-
             </div>
 
-            {/* Quick Stats */}
+            {/* Quick Stats - Dynamic Appointments */}
             <div className="grid md:grid-cols-3 gap-4 mt-10">
-
               <div className="rounded-2xl p-5 bg-sky-50 border">
                 <div className="flex items-center gap-3">
                   <Calendar className="text-sky-600" />
                   <div>
                     <p className="text-sm text-gray-500">Appointments</p>
-                    <h3 className="font-bold text-xl">12</h3>
+                    <h3 className="font-bold text-xl">
+                      {loadingCount ? "..." : appointmentsCount}
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -96,7 +133,6 @@ const ProfilePage = () => {
                   </div>
                 </div>
               </div>
-
             </div>
 
             {/* Account Details */}
@@ -106,7 +142,6 @@ const ProfilePage = () => {
               </h2>
 
               <div className="grid gap-4">
-
                 <div className="rounded-2xl border p-5 flex justify-between items-center">
                   <div className="flex items-center gap-3">
                     <User className="text-sky-600" />
@@ -134,11 +169,10 @@ const ProfilePage = () => {
                     Active
                   </span>
                 </div>
-
               </div>
             </div>
 
-            {/* Button */}
+            {/* Update Profile Button */}
             <div className="flex justify-center mt-10">
               <UpdateProfile />
             </div>

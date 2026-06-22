@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Calendar, Clock, Trash2, Stethoscope, User, AlertCircle } from "lucide-react";
+import { Calendar, Clock, Trash2, Stethoscope, User, AlertCircle, Edit3 } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 
@@ -38,7 +38,7 @@ const MyBookingPage = () => {
   const handleDelete = async (id) => {
     if (!id) return;
 
-    const confirmed = window.confirm("Are you sure you want to cancel this appointment?");
+    const confirmed = window.confirm("Are you sure you want to delete this appointment?");
     if (!confirmed) return;
 
     try {
@@ -46,23 +46,27 @@ const MyBookingPage = () => {
         method: "DELETE",
       });
 
-      if (!res.ok) throw new Error("Failed to cancel");
+      if (!res.ok) throw new Error("Failed to delete");
 
       setBookings((prev) => prev.filter((b) => b._id !== id));
-      toast.success("Appointment cancelled successfully");
+      toast.success("Appointment deleted successfully");
     } catch (err) {
       console.error(err);
-      toast.error("Failed to cancel appointment. Please try again.");
+      toast.error("Failed to delete appointment. Please try again.");
     }
   };
 
-  // Fallback image
+  const handleUpdate = (booking) => {
+    toast.info("Update feature coming soon!");
+    // router.push(`/appointments/edit/${booking._id}`); // Uncomment when edit page is ready
+  };
+
   const getDoctorImage = (booking) => {
-    return booking?.imageUrl || booking?.doctorImage || "/default-doctor.jpg"; // Add a default image in public folder
+    return booking?.imageUrl || booking?.doctorImage || "/default-doctor.jpg";
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-slate-50 py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-50 py-10 px-4">
       <div className="max-w-5xl mx-auto">
         {/* HEADER */}
         <div className="mb-10">
@@ -115,7 +119,7 @@ const MyBookingPage = () => {
         {/* BOOKINGS LIST */}
         {!loading && bookings.length > 0 && (
           <div className="space-y-6">
-            {bookings.map((b, index) => (
+            {bookings.map((b) => (
               <div
                 key={b._id}
                 className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group"
@@ -132,8 +136,8 @@ const MyBookingPage = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
                   </div>
 
-                  {/* Content */}
-                  <div className="flex-1 p-7 flex flex-col">
+                  {/* Content Area - Increased Inner Spacing */}
+                  <div className="flex-1 p-8 md:p-10 flex flex-col">   {/* ← Changed to p-10 (≈40px total, 20px+ from border) */}
                     <div className="flex-1">
                       <div className="flex items-start justify-between">
                         <div>
@@ -146,7 +150,6 @@ const MyBookingPage = () => {
                           </p>
                         </div>
 
-                        {/* Status */}
                         {b.status && (
                           <span
                             className={`px-4 py-1.5 text-sm font-medium rounded-full ${
@@ -162,7 +165,7 @@ const MyBookingPage = () => {
                         )}
                       </div>
 
-                      <div className="mt-6 space-y-4">
+                      <div className="mt-8 space-y-6">   {/* Increased spacing */}
                         <div className="flex items-center gap-3 text-gray-600">
                           <div className="w-9 h-9 rounded-2xl bg-gray-100 flex items-center justify-center">
                             <User size={18} />
@@ -195,19 +198,29 @@ const MyBookingPage = () => {
                       </div>
                     </div>
 
-                    {/* Footer Actions */}
-                    <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
+                    {/* Action Buttons */}
+                    <div className="mt-10 pt-8 border-t border-gray-100 flex items-center justify-between gap-3">
                       <p className="text-xs text-gray-400">
                         Booking ID: {b._id?.slice(-8)}
                       </p>
 
-                      <button
-                        onClick={() => handleDelete(b._id)}
-                        className="flex items-center gap-2 px-5 py-2.5 text-red-600 hover:bg-red-50 rounded-2xl transition-all hover:text-red-700"
-                      >
-                        <Trash2 size={18} />
-                        <span className="font-medium">Cancel Appointment</span>
-                      </button>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => handleUpdate(b)}
+                          className="flex items-center gap-2 px-6 py-3 text-blue-600 hover:bg-blue-50 border border-blue-200 hover:border-blue-300 rounded-2xl transition-all font-medium"
+                        >
+                          <Edit3 size={18} />
+                          Update
+                        </button>
+
+                        <button
+                          onClick={() => handleDelete(b._id)}
+                          className="flex items-center gap-2 px-6 py-3 text-red-600 hover:bg-red-50 border border-red-200 hover:border-red-300 rounded-2xl transition-all font-medium"
+                        >
+                          <Trash2 size={18} />
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
