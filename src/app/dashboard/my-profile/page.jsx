@@ -1,6 +1,6 @@
 "use client";
 
-import UpdateProfile from "@/components/profile/UpdateProfile";
+import UpdateProfile from "@/components/dashboard/UpdateProfile";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Card, Chip } from "@heroui/react";
 import { Mail, User, ShieldCheck, Calendar, AlertCircle } from "lucide-react";

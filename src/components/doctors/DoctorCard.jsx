@@ -21,7 +21,6 @@ const DoctorCard = ({ doctor }) => {
 
   return (
     <div className="group relative bg-white rounded-[28px] overflow-hidden shadow-[0_2px_12px_rgba(15,23,42,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(15,23,42,0.18)] transition-all duration-500 border border-slate-100 hover:border-transparent flex flex-col h-full">
-
       {/* Image Section */}
       <div className="relative h-72 w-full overflow-hidden bg-slate-100">
         <Image
@@ -34,12 +33,14 @@ const DoctorCard = ({ doctor }) => {
         />
 
         {/* Gradient overlay for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/0 to-black/0 pointer-events-none" />
 
         {/* Rating Badge */}
         <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
           <Star size={15} className="text-amber-500 fill-amber-500" />
-          <span className="font-semibold text-slate-800 text-sm tabular-nums">{rating}</span>
+          <span className="font-semibold text-slate-800 text-sm tabular-nums">
+            {rating}
+          </span>
         </div>
 
         {/* Name & specialty overlay on image */}
@@ -53,23 +54,22 @@ const DoctorCard = ({ doctor }) => {
           <h3 className="text-2xl font-bold text-white tracking-tight leading-tight">
             {name}
           </h3>
-          <p className="text-sm font-medium text-sky-300 mt-0.5">
-            {specialty}
-          </p>
+          <p className="text-sm font-medium text-sky-300 mt-0.5">{specialty}</p>
         </div>
       </div>
 
       {/* Content Section */}
       <div className="p-5 flex-1 flex flex-col">
         <div className="flex-1 space-y-4">
-
           {/* Hospital & Location */}
           <div className="flex items-start gap-2.5">
             <div className="mt-0.5 flex-shrink-0 w-7 h-7 rounded-full bg-sky-50 flex items-center justify-center">
               <MapPin size={14} className="text-sky-600" />
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-800 truncate">{hospital}</p>
+              <p className="text-sm font-semibold text-slate-800 truncate">
+                {hospital}
+              </p>
               <p className="text-xs text-slate-500 mt-0.5">{location}</p>
             </div>
           </div>
@@ -99,19 +99,26 @@ const DoctorCard = ({ doctor }) => {
         <div className="mt-5 pt-5 border-t border-slate-100 flex items-center justify-between gap-3">
           {fee ? (
             <div>
-              <span className="text-[11px] text-slate-400 font-medium">Consultation</span>
+              <span className="text-[11px] text-slate-400 font-medium">
+                Consultation
+              </span>
               <p className="text-xl font-bold text-slate-900 leading-tight">
                 ৳{fee}
               </p>
             </div>
-          ) : <div />}
+          ) : (
+            <div />
+          )}
 
           <Link
             href={`/appointments/${doctorId}`}
             className="group/btn inline-flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-sky-600 text-white text-sm font-semibold px-5 py-3 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-lg active:scale-[0.97] whitespace-nowrap"
           >
-            View Details 
-            <ArrowUpRight size={16} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+            View Details
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+            />
           </Link>
         </div>
       </div>

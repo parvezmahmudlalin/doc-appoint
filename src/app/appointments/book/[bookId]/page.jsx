@@ -13,10 +13,10 @@ import {
 
 import { toast } from "react-hot-toast";
 import { useParams } from "next/navigation";
-import { useSession } from "@/lib/auth-client";   // ← Changed here
+import { useSession } from "@/lib/auth-client";
 
 const BookingsPage = () => {
-  const { data: session, isLoading: sessionLoading } = useSession(); // ← Best way
+  const { data: session, isLoading: sessionLoading } = useSession();
 
   const [doctor, setDoctor] = useState(null);
   const [loadingDoctor, setLoadingDoctor] = useState(true);
@@ -26,7 +26,6 @@ const BookingsPage = () => {
   const params = useParams();
   const bookId = params?.id || params?.bookId;
 
-  // Fetch Doctor
   useEffect(() => {
     if (!bookId) return;
 
@@ -34,9 +33,7 @@ const BookingsPage = () => {
       try {
         setLoadingDoctor(true);
         const res = await fetch(`http://localhost:5000/appointments/${bookId}`);
-        
         if (!res.ok) throw new Error("Doctor not found");
-        
         const data = await res.json();
         setDoctor(data?.data || data);
       } catch (error) {
@@ -79,8 +76,9 @@ const BookingsPage = () => {
     setIsLoading(true);
 
     const finalBooking = {
+      userId: session.user.id,
       userEmail: session.user.email,
-      doctorName: doctor?.name || "Unknown Doctor",
+      doctorName: doctor?.name || "",
       patientName: booking.patientName,
       gender,
       phone: booking.phone,
@@ -117,28 +115,42 @@ const BookingsPage = () => {
   const today = new Date().toISOString().split("T")[0];
 
   if (sessionLoading) {
-    return <div className="flex justify-center items-center min-h-screen">Loading session...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        Loading session...
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-3xl mx-auto">
-        <form onSubmit={onSubmit} className="bg-white shadow-lg rounded-3xl p-8 md:p-10 space-y-8">
+        <form
+          onSubmit={onSubmit}
+          className="bg-white shadow-lg rounded-3xl p-8 md:p-10 space-y-8"
+        >
           {/* Header */}
           <div className="text-center space-y-3">
-            <h1 className="text-4xl font-bold text-gray-900">Book Appointment</h1>
-            
+            <h1 className="text-4xl font-bold text-gray-900">
+              Book Appointment
+            </h1>
+
             {loadingDoctor ? (
               <p className="text-gray-500">Loading doctor details...</p>
             ) : doctor ? (
-              <p className="text-xl font-semibold text-emerald-600">{doctor.name}</p>
+              <p className="text-xl font-semibold text-emerald-600">
+                {doctor.name}
+              </p>
             ) : (
               <p className="text-red-500">Doctor information not found</p>
             )}
 
             {session?.user && (
               <p className="text-sm text-gray-500">
-                Booking as: <span className="font-medium">{session.user.name || session.user.email}</span>
+                Booking as:{" "}
+                <span className="font-medium">
+                  {session.user.name || session.user.email}
+                </span>
               </p>
             )}
           </div>
@@ -192,7 +204,10 @@ const BookingsPage = () => {
             <div className="md:col-span-2">
               <TextField name="reason">
                 <Label>Reason / Problem</Label>
-                <TextArea placeholder="Describe your symptoms or reason for visit..." rows={4} />
+                <TextArea
+                  placeholder="Describe your symptoms or reason for visit..."
+                  rows={4}
+                />
               </TextField>
             </div>
           </div>

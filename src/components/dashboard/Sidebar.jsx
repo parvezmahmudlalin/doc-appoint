@@ -34,7 +34,6 @@ export default function Sidebar() {
 
   return (
     <aside className="hidden lg:flex w-72 h-screen bg-white border-r flex-col">
-
       {/* Links */}
       <nav className="flex-1 p-4 space-y-2">
         {links.map((item) => {
@@ -71,7 +70,6 @@ export default function Sidebar() {
           </button>
         )}
       </div>
-
     </aside>
   );
 }

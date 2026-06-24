@@ -37,20 +37,20 @@ const LoginPage = () => {
 
     if (data) {
       router.push("/");
-      router.refresh(); // 🔥 IMPORTANT FIX
+      router.refresh(); // 
     }
   };
 
   const handleGoogleSignin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/", // 🔥 IMPORTANT FIX
+      callbackURL: "/", // 
     });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-50 via-cyan-50 to-slate-100 px-4">
-      <Card className="p-10 rounded-3xl shadow-2xl border border-white/40 bg-white/80 backdrop-blur-xl">
+    <div className="max-w-2xl mt-12 p-5 mx-auto">
+      <Card className="p-10  rounded-3xl shadow-2xl border border-white/40 bg-white/80 backdrop-blur-xl">
 
         <div className="text-center mb-8">
           <h1 className="text-4xl font-extrabold tracking-tight text-cyan-600">
