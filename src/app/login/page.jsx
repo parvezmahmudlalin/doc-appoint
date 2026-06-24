@@ -49,59 +49,80 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-2xl mt-12 p-5 mx-auto">
-      <Card className="p-10  rounded-3xl shadow-2xl border border-white/40 bg-white/80 backdrop-blur-xl">
+  <div className="max-w-2xl mt-12 p-5 mx-auto">
+    <Card className="p-8 rounded-3xl shadow-2xl border border-white/40 bg-white/80 backdrop-blur-xl">
 
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-cyan-600">
-            DocAppoint
-          </h1>
+      {/* Title */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-cyan-600">
+          Login
+        </h1>
 
-          <p className="text-gray-500 mt-2 text-sm">
-            Secure login to manage appointments
-          </p>
-        </div>
+        <p className="text-gray-500 mt-2 text-sm">
+          Access your account securely
+        </p>
+      </div>
 
-        <Form onSubmit={onSubmit} className="flex flex-col gap-6">
+      {/* Form */}
+      <Form onSubmit={onSubmit} className="flex flex-col gap-5">
 
-          <TextField isRequired name="email" type="email">
-            <Label>Email</Label>
-            <Input placeholder="doctor@example.com" />
-            <FieldError />
-          </TextField>
+        <TextField isRequired name="email" type="email">
+          <Label>Email</Label>
+          <Input placeholder="Enter your email" />
+          <FieldError />
+        </TextField>
 
-          <TextField isRequired name="password" type="password">
-            <Label>Password</Label>
-            <Input placeholder="Enter password" />
-            <Description>Min 8 characters</Description>
-            <FieldError />
-          </TextField>
+        <TextField isRequired name="password" type="password">
+          <Label>Password</Label>
+          <Input placeholder="Enter password" />
+          <FieldError />
+        </TextField>
 
-          <Button
-            type="submit"
-            className="h-11 w-full bg-cyan-600 text-white"
-          >
-            Log in
-          </Button>
-        </Form>
+       
+      
 
-        <div className="flex items-center gap-3 my-5">
-          <Separator className="flex-1" />
-          <span className="text-sm text-gray-500">OR</span>
-          <Separator className="flex-1" />
-        </div>
-
+        {/* Login Button */}
         <Button
-          variant="bordered"
-          onClick={handleGoogleSignin}
-          className="w-full flex items-center gap-2"
+          type="submit"
+          className="h-11 w-full bg-cyan-600 text-white"
         >
-          <FcGoogle size={20} />
-          Continue with Google
+          Login
         </Button>
-      </Card>
-    </div>
-  );
+      </Form>
+
+      {/* Divider */}
+      <div className="flex items-center gap-3 my-6">
+        <Separator className="flex-1" />
+        <span className="text-sm text-gray-500">
+          OR
+        </span>
+        <Separator className="flex-1" />
+      </div>
+
+      {/* Social Login */}
+      <Button
+        variant="bordered"
+        onClick={handleGoogleSignin}
+        className= "w-full flex items-center gap-2"
+      >
+        <FcGoogle size={20} />
+        Continue with Google
+      </Button>
+
+      {/* Register Link */}
+      <p className="text-center text-sm mt-6 text-gray-600">
+        Don&apos;t have an account?{" "}
+        <a
+          href="/register"
+          className="text-cyan-600 font-semibold hover:underline"
+        >
+          Register
+        </a>
+      </p>
+
+    </Card>
+  </div>
+);
 };
 
 export default LoginPage;
