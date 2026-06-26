@@ -12,6 +12,7 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 
@@ -129,6 +130,17 @@ const handleGoogleSignin = async () => {
         <div>
             <Button variant="outline" onClick={handleGoogleSignin}  className={'w-full rounded-none'}><FcGoogle /> Sign in with Google</Button>
         </div>
+
+        <p className="text-center text-sm mt-6 text-gray-600">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="text-cyan-600 font-semibold hover:underline"
+          >
+            Login
+          </Link>
+        </p>
+
          </Form>
       </Card>
     </div>
