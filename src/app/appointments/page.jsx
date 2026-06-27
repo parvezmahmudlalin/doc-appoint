@@ -1,5 +1,6 @@
 "use client";
 import DoctorCard from '@/components/doctors/DoctorCard';
+import { authClient } from '@/lib/auth-client';
 import React, { useMemo, useState, useEffect } from 'react';
 
 const DoctorsPage = () => {
@@ -9,8 +10,13 @@ const DoctorsPage = () => {
 
     useEffect(() => {
         const fetchDoctors = async () => {
+             const { data: tokenData } = await authClient.token();
             try {
-                const res = await fetch('http://localhost:5000/appointments');
+                const res = await fetch('http://localhost:5000/appointments',  {
+          headers: {
+            authorization: `Bearer ${tokenData?.token}`,
+          },
+        });
                 const data = await res.json();
                 setDoctors(data);
             } finally {

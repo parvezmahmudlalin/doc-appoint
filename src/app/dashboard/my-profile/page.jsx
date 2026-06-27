@@ -17,13 +17,18 @@ const ProfilePage = () => {
   // Fetch dynamic appointments count
   useEffect(() => {
     const fetchAppointmentsCount = async () => {
+       const { data: tokenData } = await authClient.token();
       if (!user?.email) return;
 
       try {
         setLoadingCount(true);
         setCountError(false);
 
-        const res = await fetch("http://localhost:5000/appointments/book");
+        const res = await fetch("http://localhost:5000/appointments/book",  {
+          headers: {
+            authorization: `Bearer ${tokenData?.token}`,
+          },
+        });
 
         if (!res.ok) throw new Error("Failed to fetch");
 

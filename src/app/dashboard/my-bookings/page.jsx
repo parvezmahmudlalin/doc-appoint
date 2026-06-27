@@ -1,8 +1,12 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import BookingList from "@/components/dashboard/BookingList";
+import { authClient } from "@/lib/auth-client";
 
 const MyBookingPage = async () => {
+    const {token} = await auth.api.getToken({
+    headers: await headers()
+  })   
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -10,7 +14,9 @@ const MyBookingPage = async () => {
   const user = session?.user;
 
   const res = await fetch(`http://localhost:5000/booking/${user?.id}`, {
-    cache: "no-store",
+   headers: {
+    authorization: `Bearer ${token}`
+   },
   });
 
   const bookings = await res.json();

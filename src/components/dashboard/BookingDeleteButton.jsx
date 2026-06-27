@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -8,6 +9,7 @@ const BookingDeleteButton = ({ bookingId, setBookings }) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
+     const { data: tokenData } = await authClient.token();
     const confirmed = confirm(
       "Are you sure you want to delete this appointment?",
     );
@@ -19,6 +21,11 @@ const BookingDeleteButton = ({ bookingId, setBookings }) => {
     try {
       const res = await fetch(`http://localhost:5000/booking/${bookingId}`, {
         method: "DELETE",
+        headers: {
+         
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+       
       });
 
       const data = await res.json();

@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, Input } from "@heroui/react";
 
 import { useState } from "react";
@@ -24,6 +25,7 @@ const BookingEditForm = ({ booking, onCancel, setBookings }) => {
   };
 
   const handleSubmit = async () => {
+     const { data: tokenData } = await authClient.token();
     setIsLoading(true);
 
     try {
@@ -31,6 +33,7 @@ const BookingEditForm = ({ booking, onCancel, setBookings }) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
         },
         body: JSON.stringify(formData),
       });

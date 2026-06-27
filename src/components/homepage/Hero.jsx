@@ -114,7 +114,7 @@ export default function Hero() {
                     className="mt-10 flex flex-wrap gap-4"
                   >
                     <Link
-                      href="/doctors"
+                      href="/appointments"
                       className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700 hover:scale-[1.03] active:scale-95"
                     >
                       <Stethoscope className="h-5 w-5" />

@@ -18,7 +18,7 @@ export default function Sidebar() {
   const { data } = authClient.useSession();
   const user = data?.user;
 
-  // ✅ hydration safe guard
+
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Sidebar() {
     await authClient.signOut();
   };
 
-  // ✅ IMPORTANT: prevent SSR mismatch
+ 
   if (!mounted) return null;
 
   return (
