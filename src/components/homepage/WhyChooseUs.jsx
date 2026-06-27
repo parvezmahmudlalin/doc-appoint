@@ -36,8 +36,8 @@ export default function WhyChooseUs() {
   return (
     <section className="py-24 bg-base-100">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="badge badge-primary badge-outline">
+        <div className="text-center max-w-3xl mx-auto mb-16 ">
+          <span className="badge badge-primary badge-outline p-2">
             Why Choose Us
           </span>
 

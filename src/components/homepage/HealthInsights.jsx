@@ -29,7 +29,7 @@ export default function HealthInsights() {
     <section className="py-24 bg-base-200">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="badge badge-primary badge-outline">
+          <span className="badge badge-primary badge-outline p-2">
             Health Blog
           </span>
 
