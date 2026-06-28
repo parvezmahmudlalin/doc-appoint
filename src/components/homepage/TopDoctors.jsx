@@ -1,6 +1,7 @@
 import React from "react";
 import DoctorCard from "../doctors/DoctorCard";
 import Link from "next/link";
+import { Button } from "@heroui/react";
 
 const TopDoctors = async () => {
   const res = await fetch("http://localhost:5000/appointments", {
@@ -43,14 +44,16 @@ const TopDoctors = async () => {
       </div>
 
       {/* Bottom CTA */}
-      <div className="flex justify-center mt-12">
-        <Link
-          href="/appointments"
-          className="btn btn-primary btn-wide"
-        >
-          View All Doctors
-        </Link>
-      </div>
+     <div className="flex justify-center mt-12">
+  <Button>
+    <Link
+      href="/appointments"
+      className="btn btn-primary btn-wide"
+    >
+      View All Doctors
+    </Link>
+  </Button>
+</div>
     </section>
   );
 };
