@@ -48,7 +48,7 @@ const DoctorDetailsPage = async ({ params }) => {
             {/* Doctor Image */}
             <div className="md:col-span-2 flex justify-center">
               <div className="relative group">
-                <div className="absolute -inset-6 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-[2.75rem] opacity-10 group-hover:opacity-20 transition-all" />
+                <div className="absolute -inset-6 bg-linear-to-br from-blue-500 to-cyan-400 rounded-[2.75rem] opacity-10 group-hover:opacity-20 transition-all" />
                 <Image
                   src={doctor.image}
                   alt={doctor.name}

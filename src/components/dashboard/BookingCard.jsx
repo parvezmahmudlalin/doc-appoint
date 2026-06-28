@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button, Chip } from "@heroui/react";
 import BookingEditForm from "./BookingEditForm";
 import BookingDeleteButton from "./BookingDeleteButton";
+import { Edit } from "lucide-react";
 
 const BookingCard = ({ booking, setBookings }) => {
   const [showEdit, setShowEdit] = useState(false);
@@ -47,10 +48,10 @@ const BookingCard = ({ booking, setBookings }) => {
         <div className="flex flex-row md:flex-col gap-2 md:items-end pl-3 md:pl-0">
           <Button
             size="sm"
-            className="bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-lg px-4 transition-colors"
+            className=" font-medium rounded-lg px-4 transition-colors mt-5"
             onPress={() => setShowEdit(true)}
           >
-            ✏️ Edit
+            <Edit/> Edit
           </Button>
           <BookingDeleteButton
             bookingId={booking._id}

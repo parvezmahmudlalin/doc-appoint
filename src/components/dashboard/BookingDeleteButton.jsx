@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
+import { Delete, DeleteIcon, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -44,11 +45,13 @@ const BookingDeleteButton = ({ bookingId, setBookings }) => {
 
   return (
     <Button
+     size="sm"
+     variant="danger"
       isLoading={isDeleting}
       onPress={handleDelete}
-      className="bg-red-500 text-white"
+      className=" font-medium rounded-lg px-4 transition-colors mt-5"
     >
-      Delete
+      <Trash2 /> Delete
     </Button>
   );
 };
