@@ -11,7 +11,7 @@ const WelcomeBanner = () => {
   const user = data?.user;
 
   return (
-    <div className="relative overflow-hidden rounded-[30px] bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 p-8 md:p-10 shadow-xl">
+    <div className="relative overflow-hidden rounded-[30px] bg-linear-to-r from-sky-600 via-cyan-600 to-blue-700 p-8 md:p-10 shadow-xl">
 
       {/* Decorative circles */}
       <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-white/10 blur-2xl" />

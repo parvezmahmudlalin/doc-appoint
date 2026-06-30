@@ -6,6 +6,8 @@ import { Avatar, Card, Chip } from "@heroui/react";
 import { Mail, User, ShieldCheck, Calendar, AlertCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
+
+
 const ProfilePage = () => {
   const { data, isPending } = authClient.useSession();
   const user = data?.user;
