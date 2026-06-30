@@ -29,7 +29,7 @@ const BookingEditForm = ({ booking, onCancel, setBookings }) => {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`http://localhost:5000/booking/${booking._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${booking._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

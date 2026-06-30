@@ -18,7 +18,7 @@ const DoctorsPage = () => {
 
             try {
                 const res = await fetch(
-                    'http://localhost:5000/appointments',
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments`,
                     {
                         headers: {
                             authorization: `Bearer ${tokenData?.token}`,

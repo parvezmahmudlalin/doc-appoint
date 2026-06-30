@@ -26,7 +26,7 @@ const ProfilePage = () => {
         setLoadingCount(true);
         setCountError(false);
 
-        const res = await fetch("http://localhost:5000/appointments/book",  {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/appointments/book`,  {
           headers: {
             authorization: `Bearer ${tokenData?.token}`,
           },

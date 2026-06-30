@@ -43,7 +43,7 @@ const BookingsPage = () => {
         const { data: tokenData } = await authClient.token();
 
         const res = await fetch(
-          `http://localhost:5000/appointments/${bookId}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/appointments/${bookId}`,
           {
             headers: {
               authorization: `Bearer ${tokenData?.token}`,
@@ -127,7 +127,7 @@ const BookingsPage = () => {
       };
 
       const res = await fetch(
-        "http://localhost:5000/booking",
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/booking`,
         {
           method: "POST",
           headers: {

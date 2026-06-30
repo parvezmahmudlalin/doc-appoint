@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@heroui/react";
 
 const TopDoctors = async () => {
-  const res = await fetch("http://localhost:5000/appointments", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/appointments`, {
     cache: "no-store",
   });
 
